@@ -1,0 +1,229 @@
+// Variáveis - adicione mais cores se necessário
+$primary-color: #182C61;
+$secondary-color: #44bd32;
+$secondary-color-hover: #4cd137;
+$bg-color: #f5f6fa;
+$text-color: #fff;
+$text-dark: #333;
+$text-light: #666; // Para o texto dos parágrafos
+
+// Breakpoints
+$desktop: 1024px;
+$tablet: 1023px;
+$mobile: 767px;
+
+// Mixins
+@mixin container {
+  max-width: $desktop;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px; // Adicione padding para evitar que o conteúdo grude nas bordas
+
+  @media screen and (max-width: $tablet) {
+    max-width: 90%;
+  }
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $ease: ease) {
+  transition: $property $duration $ease;
+}
+
+// Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  background-color: $bg-color;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  @include container;
+}
+
+// Header
+header {
+  background-color: $primary-color;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100; // Garante que o header fique acima do conteúdo
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra sutil para destacar
+
+  .container {
+    @include flex-between;
+    padding: 16px;
+  }
+}
+
+.branding {
+  img {
+    display: block;
+    max-height: 50px; // Controla o tamanho do logo
+    width: auto;
+  }
+}
+
+.menu {
+  display: flex;
+
+  li {
+    font-weight: bold;
+    margin-left: 24px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      padding: 8px 0; // Área de clique maior
+      position: relative;
+      
+      &::after { // Efeito de underline animado
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $secondary-color;
+        @include transition(width);
+      }
+      
+      &:hover {
+        opacity: 0.9;
+        
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Section
+section {
+  padding: 56px 0;
+
+  h2 {
+    margin-bottom: 32px;
+    color: $text-dark;
+    font-size: 2em;
+    position: relative;
+    padding-bottom: 10px;
+    
+    &::after { // Linha decorativa abaixo do título
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: $primary-color;
+    }
+  }
+}
+
+// Products
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // Usar 1fr é mais flexível
+  gap: 30px; // Usar gap ao invés de column-gap/row-gap separados
+  width: 100%;
+  list-style: none;
+}
+
+.product-item {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  @include transition(transform);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    aspect-ratio: 1/1; // Mantém as imagens quadradas
+    object-fit: cover; // Garante que a imagem cubra o espaço sem distorcer
+  }
+
+  h4 {
+    margin-bottom: 8px;
+    color: $text-dark;
+    font-size: 1.2em;
+  }
+
+  p {
+    color: $text-light;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+}
+
+.product-button {
+  display: inline-block;
+  background-color: $secondary-color;
+  color: $text-color;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  width: 100%; // Botão ocupa toda largura
+  @include transition(background-color);
+
+  &:hover {
+    background-color: $secondary-color-hover;
+  }
+}
+
+// Media Queries
+@media screen and (max-width: $tablet) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  header .container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .menu {
+    width: 100%;
+    justify-content: center;
+    
+    li {
+      margin: 0 12px;
+    }
+  }
+  
+  .products {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-item {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+}
