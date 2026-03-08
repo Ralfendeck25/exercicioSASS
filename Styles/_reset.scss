@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  background-color: $bg-color;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  @include container;
+}
