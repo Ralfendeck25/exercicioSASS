@@ -1,0 +1,98 @@
+section {
+  padding: $spacing-xl 0;
+
+  h2 {
+    color: $text-dark;
+    @include section-title;
+  }
+}
+
+.products {
+  @include grid-layout(3, $spacing-lg);
+  width: 100%;
+  list-style: none;
+  @include transition;
+}
+
+.product-item {
+  background-color: #fff;
+  border-radius: $border-radius-lg;
+  padding: $spacing-sm;
+  box-shadow: $shadow-md;
+  @include transition(transform);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+
+  img {
+    width: 100%;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-sm;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    @include transition(transform);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  h4 {
+    margin-bottom: $spacing-xs;
+    color: $text-dark;
+    font-size: 1.2em;
+  }
+
+  p {
+    color: $text-light;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.product-button {
+  display: inline-block;
+  background-color: $secondary-color;
+  color: $text-color;
+  text-align: center;
+  padding: 10px $spacing-md;
+  border-radius: $border-radius-sm;
+  text-decoration: none;
+  font-weight: 500;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: $secondary-color-hover;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Elementos de busca
+.search-input {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid #ddd;
+  border-radius: $border-radius-sm;
+  font-size: 16px;
+  margin: $spacing-md 0;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.product-counter {
+  margin: 10px 0;
+  color: $text-light;
+  font-size: 14px;
+}
