@@ -1,0 +1,47 @@
+body {
+  @include transition;
+  
+  &.dark-theme {
+    background: $text-dark;
+    color: $text-color;
+    
+    .product-item {
+      background: #444;
+      border-color: #555;
+      
+      h4, p {
+        color: $text-color;
+      }
+    }
+    
+    h2 {
+      color: $text-color;
+      
+      &::after {
+        background-color: $secondary-color;
+      }
+    }
+    
+    .product-button {
+      background-color: $secondary-color-hover;
+      
+      &:hover {
+        background-color: $secondary-color;
+      }
+    }
+    
+    .search-input {
+      background: #444;
+      color: $text-color;
+      border-color: #555;
+      
+      &:focus {
+        border-color: $secondary-color;
+      }
+    }
+    
+    .product-counter {
+      color: #aaa;
+    }
+  }
+}
