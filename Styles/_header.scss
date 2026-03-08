@@ -3,12 +3,12 @@ header {
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 100;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: $z-header;
+  box-shadow: $shadow-sm;
 
   .container {
     @include flex-between;
-    padding: 16px;
+    padding: $spacing-sm;
   }
 }
 
@@ -30,26 +30,11 @@ header {
     a {
       color: $text-color;
       text-decoration: none;
-      padding: 8px 0;
-      position: relative;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: $secondary-color;
-        @include transition(width);
-      }
+      padding: $spacing-xs 0;
+      @include underline-effect($secondary-color);
       
       &:hover {
         opacity: 0.9;
-        
-        &::after {
-          width: 100%;
-        }
       }
     }
   }
