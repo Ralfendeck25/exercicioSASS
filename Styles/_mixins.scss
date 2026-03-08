@@ -1,0 +1,82 @@
+@mixin container {
+  max-width: $desktop;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+
+  @media screen and (max-width: $tablet) {
+    max-width: 90%;
+  }
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $ease: ease) {
+  transition: $property $duration $ease;
+}
+
+@mixin grid-layout($columns: 3, $gap: $spacing-lg) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin fixed-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin underline-effect($color: $secondary-color) {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: $color;
+    @include transition(width);
+  }
+  
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+@mixin section-title {
+  margin-bottom: $spacing-lg;
+  font-size: 2em;
+  position: relative;
+  padding-bottom: 10px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: $primary-color;
+  }
+}

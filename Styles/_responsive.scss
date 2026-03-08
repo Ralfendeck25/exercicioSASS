@@ -1,0 +1,35 @@
+@media screen and (max-width: $tablet) {
+  .products {
+    @include grid-layout(2, $spacing-md);
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  header .container {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+  
+  .menu {
+    width: 100%;
+    justify-content: center;
+    
+    li {
+      margin: 0 12px;
+    }
+  }
+  
+  .products {
+    @include grid-layout(1);
+  }
+  
+  .product-item {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 300px;
+  }
+}

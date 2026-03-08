@@ -1,0 +1,63 @@
+.product-modal {
+  @include fixed-center;
+  background: white;
+  padding: $spacing-lg;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-modal;
+  z-index: $z-modal;
+  text-align: center;
+  min-width: 300px;
+  
+  h3 {
+    margin-bottom: $spacing-sm;
+    color: $text-dark;
+  }
+  
+  p {
+    margin-bottom: $spacing-md;
+    color: $text-light;
+  }
+  
+  .modal-close {
+    margin-top: $spacing-md;
+    padding: 10px $spacing-lg;
+    background: $primary-color;
+    color: $text-color;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    @include transition(background-color);
+    
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: $z-overlay;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: $spacing-md;
+  right: $spacing-md;
+  padding: 10px $spacing-md;
+  background: $primary-color;
+  color: $text-color;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  z-index: $z-theme-toggle;
+  @include transition(background-color);
+  
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+  }
+}

@@ -1,0 +1,41 @@
+header {
+  background-color: $primary-color;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: $z-header;
+  box-shadow: $shadow-sm;
+
+  .container {
+    @include flex-between;
+    padding: $spacing-sm;
+  }
+}
+
+.branding {
+  img {
+    display: block;
+    max-height: 50px;
+    width: auto;
+  }
+}
+
+.menu {
+  display: flex;
+
+  li {
+    font-weight: bold;
+    margin-left: 24px;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      padding: $spacing-xs 0;
+      @include underline-effect($secondary-color);
+      
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
