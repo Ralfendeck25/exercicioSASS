@@ -1,11 +1,11 @@
-// Variáveis - adicione mais cores se necessário
+// Variáveis
 $primary-color: #182C61;
 $secondary-color: #44bd32;
 $secondary-color-hover: #4cd137;
 $bg-color: #f5f6fa;
 $text-color: #fff;
 $text-dark: #333;
-$text-light: #666; // Para o texto dos parágrafos
+$text-light: #666;
 
 // Breakpoints
 $desktop: 1024px;
@@ -17,7 +17,7 @@ $mobile: 767px;
   max-width: $desktop;
   width: 100%;
   margin: 0 auto;
-  padding: 0 16px; // Adicione padding para evitar que o conteúdo grude nas bordas
+  padding: 0 16px;
 
   @media screen and (max-width: $tablet) {
     max-width: 90%;
@@ -44,6 +44,25 @@ $mobile: 767px;
 
 body {
   background-color: $bg-color;
+  transition: all 0.3s ease;
+  
+  &.dark-theme {
+    background: #333;
+    color: #fff;
+    
+    .product-item {
+      background: #444;
+      border-color: #555;
+      
+      h4, p {
+        color: #fff;
+      }
+    }
+    
+    h2 {
+      color: #fff;
+    }
+  }
 }
 
 ul {
@@ -60,8 +79,8 @@ header {
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 100; // Garante que o header fique acima do conteúdo
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra sutil para destacar
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   .container {
     @include flex-between;
@@ -72,7 +91,7 @@ header {
 .branding {
   img {
     display: block;
-    max-height: 50px; // Controla o tamanho do logo
+    max-height: 50px;
     width: auto;
   }
 }
@@ -87,10 +106,10 @@ header {
     a {
       color: $text-color;
       text-decoration: none;
-      padding: 8px 0; // Área de clique maior
+      padding: 8px 0;
       position: relative;
       
-      &::after { // Efeito de underline animado
+      &::after {
         content: '';
         position: absolute;
         bottom: 0;
@@ -123,7 +142,7 @@ section {
     position: relative;
     padding-bottom: 10px;
     
-    &::after { // Linha decorativa abaixo do título
+    &::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -138,10 +157,11 @@ section {
 // Products
 .products {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); // Usar 1fr é mais flexível
-  gap: 30px; // Usar gap ao invés de column-gap/row-gap separados
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
   width: 100%;
   list-style: none;
+  transition: all 0.3s ease;
 }
 
 .product-item {
@@ -160,8 +180,13 @@ section {
     width: 100%;
     border-radius: 12px;
     margin-bottom: 16px;
-    aspect-ratio: 1/1; // Mantém as imagens quadradas
-    object-fit: cover; // Garante que a imagem cubra o espaço sem distorcer
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    @include transition(transform);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   h4 {
@@ -187,11 +212,17 @@ section {
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  width: 100%; // Botão ocupa toda largura
+  width: 100%;
+  border: none;
+  cursor: pointer;
   @include transition(background-color);
 
   &:hover {
     background-color: $secondary-color-hover;
+  }
+  
+  &:active {
+    transform: scale(0.95);
   }
 }
 
@@ -225,5 +256,94 @@ section {
   .product-item {
     max-width: 350px;
     margin: 0 auto;
+  }
+}
+
+// Estilos para o modal (adicionado pelo JavaScript)
+.product-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+  z-index: 2000;
+  text-align: center;
+  min-width: 300px;
+  
+  h3 {
+    margin-bottom: 15px;
+    color: $text-dark;
+  }
+  
+  p {
+    margin-bottom: 20px;
+    color: $text-light;
+  }
+  
+  .modal-close {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    @include transition(background-color);
+    
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+}
+
+// Estilos para busca e contador
+#productSearch {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 20px 0;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.product-counter {
+  margin: 10px 0;
+  color: $text-light;
+  font-size: 14px;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  @include transition(background-color);
+  
+  &:hover {
+    background-color: lighten($primary-color, 10%);
   }
 }
